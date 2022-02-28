@@ -1,4 +1,6 @@
-# Convert Images to 3D STL format
+# Create heatmap:
+
+# Convert Images to 3D STL format (Credit to mrao)
 
 ## Usage:
 
