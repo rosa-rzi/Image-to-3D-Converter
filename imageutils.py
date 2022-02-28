@@ -37,14 +37,14 @@ def crop_image(image, _max=0.0, masks=None, table=None):
 		masks = [mask[ymin:ymax + 1, xmin:xmax + 1] for mask in masks]
 		toreturn = [toreturn, masks]
 	if table:
-		print len(table['xcen'])
+		print(len(table['xcen']))
 		table = table[table['xcen'] < xmax]
 		table = table[table['ycen'] < ymax]
 		table['xcen'] = table['xcen'] - xmin
 		table['ycen'] = table['ycen'] - ymin
 		table = table[table['xcen'] > 0]
 		table = table[table['ycen'] > 0]
-		print len(table['xcen'])
+		print(len(table['xcen']))
 		toreturn.append(table)
 	return toreturn
 

@@ -14,7 +14,7 @@ def prepareImg(filename, height=50, filter_radius=2, crop=False, invert=False, c
 				break
 		f.close()
 	else:
-		img = iutils.img2array(filename)
+		img = iutils.img2array(filename) # converts image to array of [[c1,c2,c3]]
 	if crop != False:
 		img = iutils.crop_image(img, crop) if np.isscalar(crop) else iutils.crop_image(img, 1.0)
 		if np.isscalar(crop):
@@ -29,8 +29,8 @@ def prepareImg(filename, height=50, filter_radius=2, crop=False, invert=False, c
 	img = img - img.min()
 	if invert:
 		img = img.max() - img
-	img = iutils.normalize(img, True, height)
-	return np.fliplr(img)
+	img = iutils.normalize(img, True, height) # change range of pixel values to 0-1 
+	return np.fliplr(img) # reverse order of elements bc reads it in reverse order - keep
 
 
 

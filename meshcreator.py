@@ -86,12 +86,12 @@ def normalize_triangles(triset):
 	or a different printer. All sizes are in mm not inches.
 	"""
 	xsize = triset[:,1:,0].ptp()
-	if xsize > 140:
+	if xsize > 140: 
 		triset = triset * 140 / float(xsize)
 
 	ysize = triset[:,1:,1].ptp()
-	if ysize > 140:
-		triset = triset * 140 / float(ysize)
+	if ysize > 250:
+		triset = triset * 250 / float(ysize)
 
 	zsize = triset[:,1:,2].ptp()
 	if zsize > 100:
@@ -111,11 +111,11 @@ def get_cross(triset):
 	triset[:,:,0] = np.cross(v1, v2)
 	return triset
 
-def to_mesh(npimage, filename, depth=1, double=False, _ascii=False):
+def to_mesh(npimage, filename, depth=10, double=False, _ascii=False): 
 	"""
 	Writes an npimage to stl file. Splits each pixel into two triangles.
 		npimage - the image to convert represented as a numpy array.
-		filename - a string naming the file to write to. File will write to current working directory
+		filename - a string naming the file to wri1e to. File will write to current working directory
 					unless another path is given.
 		depth - the depth of the back plate. Should probably be between 10 and 30. A thicker plate gives
 				greater stability, but uses more material and has a longer build time. For writing jpg or 
@@ -139,7 +139,7 @@ def write_binary(triset, filename):
 	"""
 	Writes a binary stl file, given a set of triangles and normal vectors, along with a filename.
 	"""
-	triset = triset.astype('<f4')
+	triset = triset.astype('<f4') # 32-bit endian bytes
 	triset = triset.reshape((triset.shape[0], 12))
 	buff = np.zeros((triset.shape[0],), dtype=('f4,'*12+'i2'))
 	for n in range(12): # Fills in array by column
